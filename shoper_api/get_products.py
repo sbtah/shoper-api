@@ -1,14 +1,8 @@
 import json
 import time
 import requests
-import logging
-from shoper_api.token import get_token
-from shoper_api.token import SHOPER_STORE, SHOPER_LOGIN, SHOPER_PASSWORD
+from shoper_api.token import SHOPER_STORE, SHOPER_LOGIN, SHOPER_PASSWORD, TOKEN
 from shoper_api.create_url import create_seo_url
-
-
-TOKEN = get_token()
-logging.basicConfig(level=logging.INFO)
 
 
 # GET Requests
@@ -65,21 +59,26 @@ def get_number_of_product_pages():
 def get_list_of_all_shoper_product_ids():
     """Get all product ids from SHOPER Api."""
 
-    product_list = []
+    number_of_pages = get_number_of_product_pages()
 
-    for x in range(1, get_number_of_product_pages() + 1):
+    for x in range(1, number_of_pages + 1):
         data = {"page": f"{x}"}
         url = f"https://{SHOPER_STORE}/webapi/rest/products"
         headers = {"Authorization": f"Bearer {TOKEN}"}
         response = requests.get(url, headers=headers, params=data)
         res = response.json()
         items = res.get("list")
+        time.sleep(0.5)
         for i in items:
-            product_list.append(int(i.get("product_id")))
-            print(f"ID:{i.get('product_id')} - Added to list")
-            time.sleep(0.5)
 
-    return product_list
+            yield {
+                "product_id": i.get("product_id"),
+            }
+            for tag in i.get("translations"):
+                yield {
+                    "locale": tag,
+                    "name": i.get("translations").get(tag).get("name"),
+                }
 
 
 def get_single_product_data_for_copy(product_id, language_code):

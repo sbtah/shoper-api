@@ -1,13 +1,7 @@
 import json
 import time
 import requests
-import logging
-from shoper_api.token import get_token
-from shoper_api.token import SHOPER_STORE, SHOPER_LOGIN, SHOPER_PASSWORD
-
-
-TOKEN = get_token()
-logging.basicConfig(level=logging.INFO)
+from helpers.get_token import SHOPER_DOMAIN, TOKEN
 
 
 def create_redirect(from_url, to_url):
@@ -24,7 +18,7 @@ def create_redirect(from_url, to_url):
             "target": to_url,
         }
     )
-    url = f"https://{SHOPER_STORE}/webapi/rest/redirects"
+    url = f"https://{SHOPER_DOMAIN}/webapi/rest/redirects"
     headers = {"Authorization": f"Bearer {TOKEN}"}
     response = requests.post(url, headers=headers, data=data)
     res = response.json()

@@ -1,17 +1,14 @@
 import json
 import time
 import requests
-from shoper_api.token import get_token
-from shoper_api.token import SHOPER_STORE, SHOPER_LOGIN, SHOPER_PASSWORD
 
-
-TOKEN = get_token()
+from helpers.get_token import SHOPER_DOMAIN, TOKEN
 
 
 def get_single_redirect(redirect_id):
     """Return a response with data from single redirect endpoint."""
 
-    url = f"https://{SHOPER_STORE}/webapi/rest/redirects/{redirect_id}"
+    url = f"https://{SHOPER_DOMAIN}/webapi/rest/redirects/{redirect_id}"
     headers = {"Authorization": f"Bearer {TOKEN}"}
     response = requests.get(url, headers=headers)
     res = response.json()
@@ -26,7 +23,7 @@ def get_number_of_redirects_pages():
     https://shop.url//webapi/rest/redirects
     """
 
-    url = f"https://{SHOPER_STORE}/webapi/rest/redirects"
+    url = f"https://{SHOPER_DOMAIN}/webapi/rest/redirects"
     headers = {"Authorization": f"Bearer {TOKEN}"}
     response = requests.get(url, headers=headers)
     res = response.json()
@@ -44,7 +41,7 @@ def get_list_of_all_redirects_data():
 
     for x in range(1, get_number_of_redirects_pages() + 1):
         data = {"page": f"{x}"}
-        url = f"https://{SHOPER_STORE}/webapi/rest/redirects"
+        url = f"https://{SHOPER_DOMAIN}/webapi/rest/redirects"
         headers = {"Authorization": f"Bearer {TOKEN}"}
         response = requests.get(url, headers=headers, params=data)
         res = response.json()
@@ -52,3 +49,23 @@ def get_list_of_all_redirects_data():
         for i in items:
             print(i)
             time.sleep(0.5)
+
+
+# def get_list_of_all_shoper_redirect_ids():
+#     """Get all redirect ids from SHOPER Api."""
+
+#     redirect_list = []
+
+#     for x in range(1, get_number_of_redirects_pages()() + 1):
+#         data = {"page": f"{x}"}
+#         url = f"https://{SHOPER_STORE}/webapi/rest/products"
+#         headers = {"Authorization": f"Bearer {TOKEN}"}
+#         response = requests.get(url, headers=headers, params=data)
+#         res = response.json()
+#         items = res.get("list")
+#         for i in items:
+#             redirect_list.append(int(i.get("product_id")))
+#             print(f"ID:{i.get('product_id')} - Added to list")
+#             time.sleep(0.5)
+
+#     return redirect_list

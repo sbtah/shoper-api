@@ -1,16 +1,12 @@
 import json
 import base64
 import time
-import logging
 import requests
-from shoper_api.token import get_token
-from shoper_api.token import SHOPER_STORE, SHOPER_LOGIN, SHOPER_PASSWORD
+from helpers.get_token import SHOPER_DOMAIN, TOKEN
 
 
-logging.basicConfig(level=logging.INFO)
-TOKEN = get_token()
-
-
+# TODO
+# Specify order of image as an argument to function.
 def upload_image_for_product_from_file(product_id, alt_of_img, file_path, language):
     """Upload a new image from FILE for specified product."""
 
@@ -28,7 +24,7 @@ def upload_image_for_product_from_file(product_id, alt_of_img, file_path, langua
         }
     )
 
-    url = f"https://{SHOPER_STORE}/webapi/rest/product-images"
+    url = f"https://{SHOPER_DOMAIN}/webapi/rest/product-images"
     headers = {"Authorization": f"Bearer {TOKEN}"}
     response = requests.post(url, headers=headers, data=data)
     res = response.json()
@@ -37,6 +33,8 @@ def upload_image_for_product_from_file(product_id, alt_of_img, file_path, langua
     return res
 
 
+# TODO
+# Specify order of image as an argument to function.
 def upload_image_for_product_from_url(product_id, alt_of_img, source_url, language):
     """Upload a new image from URL for specified product."""
 
@@ -52,7 +50,7 @@ def upload_image_for_product_from_url(product_id, alt_of_img, source_url, langua
         }
     )
 
-    url = f"https://{SHOPER_STORE}/webapi/rest/product-images"
+    url = f"https://{SHOPER_DOMAIN}/webapi/rest/product-images"
     headers = {"Authorization": f"Bearer {TOKEN}"}
     response = requests.post(url, headers=headers, data=data)
     res = response.json()

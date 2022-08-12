@@ -35,7 +35,7 @@ from apiclient.categories.get_advanced import (
 if __name__ == "__main__":
     # ### TODO:
     # ## Get all categories and translations.
-    # for data in get_all_category_data():
+    # for data in get_all_categories_data():
     #     # print(data)
     #     category = from_response_category(response=data)
     #     # print(category)
@@ -106,21 +106,23 @@ if __name__ == "__main__":
     #     for trans in translations:
     #         print(trans["locale"])
 
-    ### TODO:
-    ### Working categories fetch task.
-    category_data = get_all_categories_data()
-    for cat in category_data:
-        # print(cat)
-        print("=======================================")
-        print(cat["category_id"])
-        category = from_response_category(
-            response=cat,
-        )
-        # print(category["category_translations"])
+    # ### TODO:
+    # ### Working categories fetch task.
+    # category_data = get_all_categories_data()
+    # for cat in category_data:
+    #     # print(cat)
+    #     print("=======================================")
+    #     print(cat["category_id"])
+    #     category = from_response_category(
+    #         response=cat,
+    #     )
+    #     # print(category["category_translations"])
 
-        translations = from_response_translations_for_category(
-            response=category["category_translations"],
-        )
+    #     translations = from_response_translations_for_category(
+    #         response=category["category_translations"],
+    #     )
 
-        for x in translations:
-            print(x["locale"])
+    #     for x in translations:
+    #         print(x)
+
+    print(get_single_category_data(84))

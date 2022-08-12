@@ -87,7 +87,7 @@ def from_response_translations_for_category(response):
             seo_url = translation[1].get("seo_url")
             permalink = translation[1].get("permalink")
             active = translation[1].get("active")
-            is_default = translation[1].get("is_default")
+            is_default = translation[1].get("isdefault")
             lang_id = translation[1].get("lang_id")
             items = translation[1].get("items")
             yield {

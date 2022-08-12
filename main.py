@@ -23,7 +23,7 @@ from apiclient.categories.get_basic import (
     get_number_of_categories,
 )
 from apiclient.categories.get_medium import (
-    get_all_category_data,
+    get_all_categories_data,
     get_all_shoper_categories_ids,
 )
 from apiclient.categories.get_advanced import (
@@ -91,15 +91,36 @@ if __name__ == "__main__":
     #     for trans in translations:
     #         print(trans["locale"])
 
-    products_data = get_all_products_data()
-    for prod in products_data:
-        product = from_response_product(
-            response=prod,
+    ### TODO:
+    ### Working products fetch task.
+    # products_data = get_all_products_data()
+    # for prod in products_data:
+    #     product = from_response_product(
+    #         response=prod,
+    #     )
+    #     print(product["shoper_id"])
+    #     translations = from_response_translations_for_product(
+    #         response=product["shoper_product_translations"],
+    #     )
+    #     # # print(translations)
+    #     for trans in translations:
+    #         print(trans["locale"])
+
+    ### TODO:
+    ### Working categories fetch task.
+    category_data = get_all_categories_data()
+    for cat in category_data:
+        # print(cat)
+        print("=======================================")
+        print(cat["category_id"])
+        category = from_response_category(
+            response=cat,
         )
-        print(product["shoper_id"])
-        translations = from_response_translations_for_product(
-            response=product["shoper_product_translations"],
+        # print(category["category_translations"])
+
+        translations = from_response_translations_for_category(
+            response=category["category_translations"],
         )
-        # # print(translations)
-        for trans in translations:
-            print(trans["locale"])
+
+        for x in translations:
+            print(x["locale"])

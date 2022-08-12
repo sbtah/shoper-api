@@ -5,7 +5,7 @@ from apiclient.helpers.logging import logging
 from apiclient.categories.get_basic import get_number_of_categories_pages
 
 
-def get_all_category_data():
+def get_all_categories_data():
     """
     Yield all Categories for all pages from Shoper Api,
     by looping over all pages.

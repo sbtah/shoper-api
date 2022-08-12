@@ -59,7 +59,7 @@ def from_response_category(response):
         "category_id": category_id,
         "root": root,
         "order": order,
-        "translations": translations,
+        "category_translations": translations,
     }
 
 
@@ -70,41 +70,42 @@ def from_response_translations_for_category(response):
 
     Used to seperate logic of creating Categories and Translations.
     """
-
-    try:
-        for translation in response.items():
-            print(translation[0])
-            # locale = translation
-            # shoper_translation_id = translation.get("trans_id")
-            # related_category_id = translation.get("category_id")
-            # name = translation.get("name")
-            # description = translation.get("description")
-            # description_bottom = translation.get("description_bottom")
-            # seo_title = translation.get("seo_title")
-            # seo_description = translation.get("seo_description")
-            # seo_keywords = translation.get("seo_keywords")
-            # seo_url = translation.get("seo_url")
-            # permalink = translation.get("permalink")
-            # active = translation.get("active")
-            # is_default = translation.get("is_default")
-            # lang_id = translation.get("lang_id")
-            # items = translation.get("items")
-        yield {
-            # "locale": locale,
-            # "shoper_translation_id": shoper_translation_id,
-            # "related_category_id": related_category_id,
-            # "name": name,
-            # "description": description,
-            # "description_bottom": description_bottom,
-            # "seo_title": seo_title,
-            # "seo_description": seo_description,
-            # "seo_keywords": seo_keywords,
-            # "seo_url": seo_url,
-            # "permalink": permalink,
-            # "active": active,
-            # "is_default": is_default,
-            # "lang_id": lang_id,
-            # "items": items,
-        }
-    except Exception as e:
-        logging.error(f"Error while getting response: {e}")
+    # print(response)
+    # try:
+    for translation in response.items():
+        # print(translation)
+        try:
+            locale = translation[0]
+            shoper_translation_id = translation[1].get("trans_id")
+            related_category_id = translation[1].get("category_id")
+            name = translation[1].get("name")
+            description = translation[1].get("description")
+            description_bottom = translation[1].get("description_bottom")
+            seo_title = translation[1].get("seo_title")
+            seo_description = translation[1].get("seo_description")
+            seo_keywords = translation[1].get("seo_keywords")
+            seo_url = translation[1].get("seo_url")
+            permalink = translation[1].get("permalink")
+            active = translation[1].get("active")
+            is_default = translation[1].get("is_default")
+            lang_id = translation[1].get("lang_id")
+            items = translation[1].get("items")
+            yield {
+                "locale": locale,
+                "shoper_translation_id": shoper_translation_id,
+                "related_category_id": related_category_id,
+                "category_name": name,
+                "category_description": description,
+                "category_description_bottom": description_bottom,
+                "category_seo_title": seo_title,
+                "category_seo_description": seo_description,
+                "category_seo_keywords": seo_keywords,
+                "category_seo_url": seo_url,
+                "category_permalink": permalink,
+                "category_active": active,
+                "category_is_default": is_default,
+                "category_lang_id": lang_id,
+                "category_items": items,
+            }
+        except Exception as e:
+            logging.error(f"Error while getting response: {e}")

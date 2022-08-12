@@ -1,9 +1,9 @@
 import time
 from token import AT
 import requests
-from shoper_api.helpers.get_token import SHOPER_DOMAIN, TOKEN
-from shoper_api.helpers.logging import logging
-from shoper_api.products.get_basic import get_number_of_product_pages
+from apiclient.helpers.get_token import SHOPER_DOMAIN, TOKEN
+from apiclient.helpers.logging import logging
+from apiclient.products.get_basic import get_number_of_product_pages
 
 
 def get_all_shoper_product_ids_for_lang(lang_code):

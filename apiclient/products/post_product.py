@@ -1,8 +1,8 @@
 import json
 import time
 import requests
-from shoper_api.helpers.get_token import SHOPER_DOMAIN, TOKEN
-from shoper_api.helpers.create_url import create_seo_url
+from apiclient.helpers.get_token import SHOPER_DOMAIN, TOKEN
+from apiclient.helpers.create_url import create_seo_url
 
 
 def create_product_at_shoper(

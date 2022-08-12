@@ -2,7 +2,7 @@ import os
 import time
 import requests
 from dotenv import load_dotenv
-from shoper_api.helpers.logging import logging
+from apiclient.helpers.logging import logging
 
 
 # Get private data fron .env variable

@@ -1,16 +1,16 @@
 from gettext import translation
-from shoper_api.products.get_basic import (
+from apiclient.products.get_basic import (
     get_number_of_products,
     get_number_of_product_pages,
     get_single_product,
     get_all_products,
 )
-from shoper_api.products.get_medium import (
+from apiclient.products.get_medium import (
     get_all_products_data,
     get_all_shoper_product_ids,
     get_all_shoper_product_skus,
 )
-from shoper_api.products.get_advanced import (
+from apiclient.products.get_advanced import (
     get_all_shoper_product_ids_for_lang,
     get_all_shoper_product_skus_for_lang,
     get_single_product_data,
@@ -18,15 +18,15 @@ from shoper_api.products.get_advanced import (
     from_response_translations_for_product,
     from_response_stock_for_product,
 )
-from shoper_api.categories.get_basic import (
+from apiclient.categories.get_basic import (
     get_number_of_categories_pages,
     get_number_of_categories,
 )
-from shoper_api.categories.get_medium import (
+from apiclient.categories.get_medium import (
     get_all_category_data,
     get_all_shoper_categories_ids,
 )
-from shoper_api.categories.get_advanced import (
+from apiclient.categories.get_advanced import (
     get_single_category_data,
     from_response_translations_for_category,
     from_response_category,

@@ -79,7 +79,7 @@ def get_single_product(id):
         logging.error("HTTPError was raised.")
         return None
     except Exception as e:
-        logging.error(f"(python_get) Exception: {e}")
+        logging.error(f"(get_single_product) Exception: {e}")
     else:
         product = response.json()
         return product
@@ -105,7 +105,7 @@ def get_all_products():
         logging.error("HTTPError was raised.")
         return None
     except Exception as e:
-        logging.error(f"(python_get) Exception: {e}")
+        logging.error(f"(get_all_products) Exception: {e}")
     else:
         products = response.json()
         return products

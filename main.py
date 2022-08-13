@@ -1,3 +1,4 @@
+import time
 from gettext import translation
 from apiclient.products.get_basic import (
     get_number_of_products,
@@ -7,6 +8,7 @@ from apiclient.products.get_basic import (
 )
 from apiclient.products.get_medium import (
     get_all_products_data,
+    get_all_products_data_v2,
     get_all_shoper_product_ids,
     get_all_shoper_product_skus,
 )
@@ -32,7 +34,31 @@ from apiclient.categories.get_advanced import (
     from_response_category,
 )
 
+from apiclient.images.get_medium import get_all_images_data, get_all_images_ids
+from apiclient.images.get_advanced import (
+    get_single_image_data,
+    from_response_image,
+    from_response_translations_for_image,
+)
+
 if __name__ == "__main__":
+    images = get_all_images_data()
+    for img in images:
+        image = from_response_image(
+            response=img,
+        )
+        print(image["shoper_gfx_id"])
+        translations = from_response_translations_for_image(
+            response=image["shoper_image_translations"]
+        )
+        for trans in translations:
+            print(trans)
+
+    ### Products new get from api test...
+    # genex = get_all_products_data_v2()
+    # for x in genex:
+    #     print(x)
+    # pass
     # ### TODO:
     # ## Get all categories and translations.
     # for data in get_all_categories_data():
@@ -94,6 +120,8 @@ if __name__ == "__main__":
     ### TODO:
     ### Working products fetch task.
     # products_data = get_all_products_data()
+    # start = time.perf_counter()
+    # print(f"DEBUG TIME START: {(start)}")
     # for prod in products_data:
     #     product = from_response_product(
     #         response=prod,
@@ -105,6 +133,9 @@ if __name__ == "__main__":
     #     # # print(translations)
     #     for trans in translations:
     #         print(trans["locale"])
+    # end = time.perf_counter()
+    # print(f"DEBUG TIME END: {(end)}")
+    # print(f"DEBUG TIME Working: {(end - start)}")
 
     # ### TODO:
     # ### Working categories fetch task.
@@ -124,5 +155,3 @@ if __name__ == "__main__":
 
     #     for x in translations:
     #         print(x)
-
-    print(get_single_category_data(84))
